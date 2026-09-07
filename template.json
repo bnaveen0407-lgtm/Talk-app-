@@ -1,0 +1,13 @@
+{
+  "AWSTemplateFormateVersion":"2010-09-09",
+  "Description": "My First CloudFormation Template",
+  "Resources": {
+    "MyFirstEc2": {
+      "Type": "AWS::EC2::Instance",
+      "properties": {
+        "InstanceType": "t2.micro",
+        "ImageId": "ami-0c55b159cbfafe1f0"
+      }
+    }
+  }
+}
