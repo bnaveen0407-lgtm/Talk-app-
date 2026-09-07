@@ -1,0 +1,918 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TalkItOut - A Safe Place to Talk</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #06142e, #0b2b52);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 6%;
+
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #00c6ff;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00c6ff;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 90vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 100px 20px;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(0, 198, 255, 0.15),
+                    transparent 40%
+                );
+        }
+
+        .hero h1 {
+            max-width: 850px;
+
+            font-size: clamp(38px, 6vw, 64px);
+            line-height: 1.15;
+
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            font-size: 21px;
+            opacity: 0.9;
+        }
+
+        .private {
+            margin-top: 15px;
+            font-size: 16px !important;
+            opacity: 0.75 !important;
+        }
+
+        .hero button,
+        .book-btn {
+            border: none;
+            color: white;
+            cursor: pointer;
+
+            background: linear-gradient(
+                90deg,
+                #00c6ff,
+                #7f5af0
+            );
+
+            transition: 0.3s;
+        }
+
+        .hero button {
+            margin-top: 35px;
+
+            padding: 15px 38px;
+
+            border-radius: 30px;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            box-shadow: 0 8px 25px rgba(0, 198, 255, 0.2);
+        }
+
+        .hero button:hover,
+        .book-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(127, 90, 240, 0.35);
+        }
+
+        /* =========================
+           SECTIONS
+        ========================== */
+
+        section {
+            padding: 90px 10%;
+            scroll-margin-top: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        #about {
+            text-align: center;
+        }
+
+        #about > p {
+            max-width: 850px;
+            margin: 0 auto;
+
+            font-size: 18px;
+            opacity: 0.85;
+        }
+
+        /* =========================
+           SERVICES
+        ========================== */
+
+        .services {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 30px;
+
+            margin-top: 50px;
+        }
+
+        .card {
+            padding: 35px 30px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius: 18px;
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            background: rgba(255, 255, 255, 0.09);
+
+            border-color: rgba(0, 198, 255, 0.3);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 21px;
+            font-weight: bold;
+
+            margin: 20px 0;
+        }
+
+        .book-btn {
+            padding: 12px 28px;
+
+            border-radius: 25px;
+
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           TESTIMONIALS
+        ========================== */
+
+        .testimonials {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 30px;
+
+            margin-top: 50px;
+        }
+
+        .testimonial {
+            padding: 30px;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius: 18px;
+
+            font-size: 17px;
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            transition: 0.3s;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            text-align: center;
+
+            padding: 45px 20px;
+
+            background: rgba(0, 0, 0, 0.4);
+
+            font-size: 14px;
+
+            opacity: 0.9;
+        }
+
+        footer p + p {
+            margin-top: 10px;
+        }
+
+        /* =========================
+           MODAL
+        ========================== */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+            z-index: 2000;
+
+            inset: 0;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.75);
+
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 450px;
+
+            padding: 35px;
+
+            background: #0b2445;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 20px;
+
+            position: relative;
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        .close-btn {
+            position: absolute;
+
+            top: 15px;
+            right: 20px;
+
+            background: none;
+            border: none;
+
+            color: white;
+
+            font-size: 28px;
+
+            cursor: pointer;
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .booking-form input,
+        .booking-form select {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .booking-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .booking-form select option {
+            color: black;
+        }
+
+        .confirm-btn {
+            padding: 13px;
+
+            border: none;
+            border-radius: 25px;
+
+            background: linear-gradient(
+                90deg,
+                #00c6ff,
+                #7f5af0
+            );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .confirm-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================== */
+
+        .success-message {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            background: rgba(0, 198, 255, 0.12);
+
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 16px 20px;
+
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .hero {
+                min-height: 80vh;
+                padding: 80px 20px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            section {
+                padding: 70px 6%;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+
+            .modal-content {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav>
+
+        <div class="logo">
+            TalkItOut
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#about">About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero" id="home">
+
+        <h1>
+            You Don't Have To Carry Everything Alone
+        </h1>
+
+        <p>
+            Talk. Share. Feel Heard.
+        </p>
+
+        <p class="private">
+            🔒 Your conversations stay private.
+        </p>
+
+        <button onclick="scrollToServices()">
+            Start Talking
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about">
+
+        <h2 class="section-title">
+            Why TalkItOut Exists
+        </h2>
+
+        <p>
+            In today's busy and stressful world, many people don't have
+            someone who truly listens. TalkItOut was created to give
+            everyone a safe place to share thoughts, emotions, and
+            experiences without judgement.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================== -->
+
+    <section id="services">
+
+        <h2 class="section-title">
+            Our Services
+        </h2>
+
+        <div class="services">
+
+            <div class="card">
+
+                <h3>
+                    🎧 Audio Talk
+                </h3>
+
+                <div class="price">
+                    ₹300 / 1 hour
+                </div>
+
+                <button
+                    class="book-btn"
+                    onclick="openBooking('Audio Talk', '₹300 / 1 hour')">
+                    Book Now
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    📹 Video Talk
+                </h3>
+
+                <div class="price">
+                    ₹500 / 1 hour
+                </div>
+
+                <button
+                    class="book-btn"
+                    onclick="openBooking('Video Talk', '₹500 / 1 hour')">
+                    Book Now
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    👤 One-to-One Conversation
+                </h3>
+
+                <div class="price">
+                    ₹700 / 1 hour
+                </div>
+
+                <button
+                    class="book-btn"
+                    onclick="openBooking(
+                        'One-to-One Conversation',
+                        '₹700 / 1 hour'
+                    )">
+                    Book Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TESTIMONIALS
+    ========================== -->
+
+    <section id="testimonials">
+
+        <h2 class="section-title">
+            Testimonials
+        </h2>
+
+        <div class="testimonials">
+
+            <div class="testimonial">
+                "TalkItOut helped me release my stress after a tough week."
+                <br><br>
+                - Anonymous
+            </div>
+
+
+            <div class="testimonial">
+                "I finally feel heard and understood. Highly recommend."
+                <br><br>
+                - Praveen
+            </div>
+
+
+            <div class="testimonial">
+                "Safe, private, and supportive — exactly what I needed."
+                <br><br>
+                - Karthik Sai
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            TalkItOut is not therapy or medical advice.
+            It is a supportive conversation platform.
+        </p>
+
+        <p>
+            © 2026 TalkItOut. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         BOOKING MODAL
+    ========================== -->
+
+    <div class="modal" id="bookingModal">
+
+        <div class="modal-content">
+
+            <button
+                class="close-btn"
+                onclick="closeBooking()">
+                &times;
+            </button>
+
+            <h2 id="serviceTitle">
+                Book a Session
+            </h2>
+
+            <p id="servicePrice">
+                Choose your preferred session.
+            </p>
+
+
+            <form
+                class="booking-form"
+                id="bookingForm">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Your Email"
+                    required
+                >
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Phone Number"
+                    required
+                >
+
+                <select id="sessionTime" required>
+
+                    <option value="">
+                        Select Preferred Time
+                    </option>
+
+                    <option>
+                        Morning - 9 AM to 12 PM
+                    </option>
+
+                    <option>
+                        Afternoon - 12 PM to 4 PM
+                    </option>
+
+                    <option>
+                        Evening - 4 PM to 8 PM
+                    </option>
+
+                    <option>
+                        Night - 8 PM to 10 PM
+                    </option>
+
+                </select>
+
+                <button
+                    type="submit"
+                    class="confirm-btn">
+                    Confirm Booking
+                </button>
+
+            </form>
+
+
+            <div
+                class="success-message"
+                id="successMessage">
+
+                ✅ Booking request submitted successfully!
+                <br>
+                We will contact you shortly.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        // Scroll to Services
+        function scrollToServices() {
+
+            document
+                .getElementById("services")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        // Open Booking Modal
+        function openBooking(service, price) {
+
+            const modal =
+                document.getElementById("bookingModal");
+
+            const serviceTitle =
+                document.getElementById("serviceTitle");
+
+            const servicePrice =
+                document.getElementById("servicePrice");
+
+            const form =
+                document.getElementById("bookingForm");
+
+            const successMessage =
+                document.getElementById("successMessage");
+
+
+            serviceTitle.textContent =
+                "Book: " + service;
+
+            servicePrice.textContent =
+                price;
+
+
+            form.style.display = "flex";
+
+            successMessage.classList.remove("show");
+
+
+            modal.classList.add("active");
+
+        }
+
+
+        // Close Booking Modal
+        function closeBooking() {
+
+            document
+                .getElementById("bookingModal")
+                .classList.remove("active");
+
+        }
+
+
+        // Close modal when clicking outside
+        document
+            .getElementById("bookingModal")
+            .addEventListener("click", function(event) {
+
+                if (event.target === this) {
+                    closeBooking();
+                }
+
+            });
+
+
+        // Close modal using Escape key
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+                closeBooking();
+            }
+
+        });
+
+
+        // Booking form submission
+        document
+            .getElementById("bookingForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const form = this;
+
+                const successMessage =
+                    document.getElementById("successMessage");
+
+
+                form.style.display = "none";
+
+                successMessage.classList.add("show");
+
+
+                // Reset form
+                form.reset();
+
+
+                // Automatically close modal after 3 seconds
+                setTimeout(function() {
+
+                    closeBooking();
+
+                    form.style.display = "flex";
+
+                    successMessage.classList.remove("show");
+
+                }, 3000);
+
+            });
+
+    </script>
+
+</body>
+</html>
+```
